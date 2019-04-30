@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/play"
+        android:background="@drawable/start"
         android:onClick="startGame"/>
 
     <TextView
@@ -22,7 +22,6 @@
         android:layout_centerHorizontal="true"
         android:text="Play"
         android:textSize="34sp"
-        android:layout_below="@+id/imageButton"
         android:layout_marginTop="10dp"
         android:textColor="@android:color/holo_red_dark"/>
 </RelativeLayout>

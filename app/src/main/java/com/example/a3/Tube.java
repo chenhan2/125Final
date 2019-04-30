@@ -6,7 +6,7 @@ public class Tube {
     // tubeX = Tube X-coordinate, topTubeOffsetY = top tube bottom edge coordinate
     private int tubeX, topTubeOffsetY;
     private Random random;
-    private int tubeColor;
+    private int tubeWord;
 
     public Tube(int tubeX, int topTubeOffsetY){
         this.tubeX = tubeX;
@@ -14,12 +14,12 @@ public class Tube {
         random = new Random();
     }
 
-    public void setTubeColor(){
-        tubeColor = random.nextInt(2);
+    public void setTubeWord(){
+        tubeWord = random.nextInt(4);
     }
 
-    public int getTubeColor(){
-        return tubeColor;
+    public int getTubeWord(){
+        return tubeWord;
     }
 
     public int getTopTubeOffsetY(){

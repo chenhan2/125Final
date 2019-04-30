@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,7 +13,7 @@ import java.util.Random;
 public class GameEngine {
 
     BackgroundImage backgroundImage;
-    Bird bird;
+    Geof geof;
     static int gameState;
     ArrayList<Tube> tubes;
     Random random;
@@ -24,7 +23,7 @@ public class GameEngine {
 
     public GameEngine() {
         backgroundImage = new BackgroundImage();
-        bird = new Bird();
+        geof = new Geof();
         // 0 = Not started
         //1 = Playing
         //2 = GameOver
@@ -50,10 +49,10 @@ public class GameEngine {
 
     public void updateAndDrawTubes(Canvas canvas) {
         if (gameState == 1) {
-            if ((tubes.get(scoringTube).getTubeX() < bird.getX() + AppConstants.getBitmapBank().getBirdWidth())
-                    && (tubes.get(scoringTube).getTopTubeOffsetY() > bird.getY()
-                    || tubes.get(scoringTube).getBottomTubeY() < (bird.getY() +
-                    AppConstants.getBitmapBank().getBirdHeight()))) {
+            if ((tubes.get(scoringTube).getTubeX() < geof.getX() + AppConstants.getBitmapBank().getGeofWidth())
+                    && (tubes.get(scoringTube).getTopTubeOffsetY() > geof.getY()
+                    || tubes.get(scoringTube).getBottomTubeY() < (geof.getY() +
+                    AppConstants.getBitmapBank().getGeofHeight()))) {
                 // Go to GameOver screen
                 gameState = 2;
                 //Log.d("Game", "Over");
@@ -63,7 +62,7 @@ public class GameEngine {
                 intent.putExtra("score", score);
                 context.startActivity(intent);
                 ((Activity) context).finish();
-            } else if (tubes.get(scoringTube).getTubeX() < bird.getX() - AppConstants.getBitmapBank().getTubeWidth()) {
+            } else if (tubes.get(scoringTube).getTubeX() < geof.getX() - AppConstants.getBitmapBank().getTubeWidth()) {
                 score++;
                 scoringTube++;
                 if (scoringTube > AppConstants.numberOfTubes - 1) {
@@ -78,15 +77,21 @@ public class GameEngine {
                     int topTubeOffsetY = AppConstants.minTubeOffsetY +
                             random.nextInt(AppConstants.maxTubeOffsetY - AppConstants.minTubeOffsetY + 1);
                     tubes.get(i).setTopTubeOffsetY(topTubeOffsetY);
-                    tubes.get(i).setTubeColor();
+                    tubes.get(i).setTubeWord();
                 }
                 tubes.get(i).setTubeX(tubes.get(i).getTubeX() - AppConstants.tubeVelocity);
-                if (tubes.get(i).getTubeColor() == 0) {
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeTop(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeBottom(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
-                } else {
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getRedTubeTop(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getRedTubeBottom(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
+                if (tubes.get(i).getTubeWord() == 0) {
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeTop1(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeBottom1(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
+                } else if (tubes.get(i).getTubeWord() == 1) {
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeTop2(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeBottom2(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
+                } else if (tubes.get(i).getTubeWord() == 2) {
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeTop3(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeBottom3(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
+                } else if (tubes.get(i).getTubeWord() == 3) {
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeTop4(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeBottom4(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
                 }
             }
             canvas.drawText("Pt: " + score, 0, 110, scorePaint);
@@ -105,20 +110,13 @@ public class GameEngine {
         }
     }
 
-    public void updateAndDrawBird(Canvas canvas) {
+    public void updateAndDrawGeof(Canvas canvas) {
         if (gameState == 1) {
-            if (bird.getY() < (AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getBirdHeight()) || bird.getVelocity() < 0) {
-                bird.setVelocity(bird.getVelocity() + AppConstants.gravity);
-                bird.setY(bird.getY() + bird.getVelocity());
+            if (geof.getY() < (AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getGeofHeight()) || geof.getVelocity() < 0) {
+                geof.setVelocity(geof.getVelocity() + AppConstants.gravity);
+                geof.setY(geof.getY() + geof.getVelocity());
             }
         }
-        int currentFrame = bird.getCurrentFrame();
-        canvas.drawBitmap(AppConstants.getBitmapBank().getBird(currentFrame), bird.getX(), bird.getY(), null);
-        currentFrame++;
-        // If it exceeds maxframe re-initialize to 0
-        if (currentFrame > bird.maxFrame) {
-            currentFrame = 0;
-        }
-        bird.setCurrentFrame(currentFrame);
+        canvas.drawBitmap(AppConstants.getBitmapBank().getGeof(), geof.getX(), geof.getY(), null);
     }
 }

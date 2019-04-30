@@ -36,8 +36,8 @@ public class AppConstants {
     public static void setGameConstants(){
         gravity = 3;
         VELOCITY_WHEN_JUMPED = -40;
-        gapBetweenTopAndBottomTubes = 600;
-        numberOfTubes = 2;
+        gapBetweenTopAndBottomTubes = 550;
+        numberOfTubes = 4;
         tubeVelocity = 12;
         minTubeOffsetY = (int)(gapBetweenTopAndBottomTubes / 2.0);
         maxTubeOffsetY = SCREEN_HEIGHT - minTubeOffsetY - gapBetweenTopAndBottomTubes;

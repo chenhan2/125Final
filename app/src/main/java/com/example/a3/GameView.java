@@ -61,7 +61,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
             }else{
                 AppConstants.getSoundBank().playWing();
             }
-            AppConstants.getGameEngine().bird.setVelocity(AppConstants.VELOCITY_WHEN_JUMPED);
+            AppConstants.getGameEngine().geof.setVelocity(AppConstants.VELOCITY_WHEN_JUMPED);
         }
         return true;
     }

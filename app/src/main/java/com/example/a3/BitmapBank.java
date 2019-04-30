@@ -7,65 +7,74 @@ import android.graphics.BitmapFactory;
 public class BitmapBank {
 
     Bitmap background;
-    Bitmap[] bird;
-    Bitmap tubeTop, tubeBottom;
-    Bitmap redTubeTop, redTubeBottom;
+    Bitmap geof;
+    Bitmap[] tubeTop, tubeBottom;
 
     public BitmapBank(Resources res) {
         background = BitmapFactory.decodeResource(res, R.drawable.main_background);
-        background = scaleImage(background);
-        bird = new Bitmap[4];
-        bird[0] = BitmapFactory.decodeResource(res, R.drawable.geof);
-        bird[1] = BitmapFactory.decodeResource(res, R.drawable.geof);
-        bird[2] = BitmapFactory.decodeResource(res, R.drawable.geof);
-        bird[3] = BitmapFactory.decodeResource(res, R.drawable.geof);
-        tubeTop = BitmapFactory.decodeResource(res, R.drawable.tube_top);
-        tubeBottom = BitmapFactory.decodeResource(res, R.drawable.tube_bottom);
-        redTubeTop = BitmapFactory.decodeResource(res, R.drawable.red_tube_top);
-        redTubeBottom = BitmapFactory.decodeResource(res, R.drawable.red_tube_bottom);
+        tubeTop = new Bitmap[4];
+        tubeBottom = new Bitmap[4];
+        geof = BitmapFactory.decodeResource(res, R.drawable.geof);
+        tubeTop[0] = BitmapFactory.decodeResource(res, R.drawable.tube_top1);
+        tubeTop[1] = BitmapFactory.decodeResource(res, R.drawable.tube_top2);
+        tubeTop[2] = BitmapFactory.decodeResource(res, R.drawable.tube_top3);
+        tubeTop[3] = BitmapFactory.decodeResource(res, R.drawable.tube_top4);
+        tubeBottom[0] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom1);
+        tubeBottom[1] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom2);
+        tubeBottom[2] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom3);
+        tubeBottom[3] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom4);
     }
 
-    // Return Red Tube-Top Bitmap
-    public Bitmap getRedTubeTop(){
-        return redTubeTop;
-    }
 
-    // Return Red Tube-Bottom Bitmap
-    public Bitmap getRedTubeBottom(){
-        return redTubeBottom;
-    }
 
     // Return Tube-Top Bitmap
-    public Bitmap getTubeTop(){
-        return tubeTop;
+    public Bitmap getTubeTop1(){
+        return tubeTop[0];
     }
-
+    public Bitmap getTubeTop2(){
+        return tubeTop[1];
+    }
+    public Bitmap getTubeTop3(){
+        return tubeTop[2];
+    }
+    public Bitmap getTubeTop4(){
+        return tubeTop[3];
+    }
     // Return Tube-Bottom Bitmap
-    public Bitmap getTubeBottom(){
-        return tubeBottom;
+    public Bitmap getTubeBottom1(){
+        return tubeBottom[0];
+    }
+    public Bitmap getTubeBottom2(){
+        return tubeBottom[1];
+    }
+    public Bitmap getTubeBottom3(){
+        return tubeBottom[2];
+    }
+    public Bitmap getTubeBottom4(){
+        return tubeBottom[3];
     }
 
     //Return Tube-width
     public int getTubeWidth(){
-        return tubeTop.getWidth();
+        return tubeTop[0].getWidth();
     }
 
     //Return Tube-height
     public int getTubeHeight(){
-        return tubeTop.getHeight();
+        return tubeTop[0].getHeight();
     }
 
-    // Return bird bitmap of frame
-    public Bitmap getBird(int frame){
-        return bird[frame];
+    // Return geof bitmap of frame
+    public Bitmap getGeof(){
+        return geof;
     }
 
-    public int getBirdWidth(){
-        return bird[0].getWidth();
+    public int getGeofWidth(){
+        return geof.getWidth();
     }
 
-    public int getBirdHeight(){
-        return bird[0].getHeight();
+    public int getGeofHeight(){
+        return geof.getHeight();
     }
 
     //Return background bitmap
@@ -76,21 +85,5 @@ public class BitmapBank {
     //Return background width
     public int getBackgroundWidth(){
         return background.getWidth();
-    }
-
-    //Return background height
-    public int getBackgroundHeight(){
-        return background.getHeight();
-    }
-
-    public Bitmap scaleImage(Bitmap bitmap){
-        float widthHeightRatio = getBackgroundWidth() / getBackgroundHeight();
-        /*
-        We'll multiply widthHeightRatio with screenHeight to get scaled width of the bitmap.
-        Then call createScaledBitmap() to create a new bitmap, scaled from an existing bitmap, when possible.
-         */
-        int backgroundScaledWidth = (int) widthHeightRatio * AppConstants.SCREEN_HEIGHT;
-        return bitmap;
-        //return Bitmap.createScaledBitmap(bitmap, backgroundScaledWidth, AppConstants.SCREEN_HEIGHT, false);
     }
 }
