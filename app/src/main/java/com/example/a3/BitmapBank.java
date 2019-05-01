@@ -8,60 +8,60 @@ public class BitmapBank {
 
     Bitmap background;
     Bitmap geof;
-    Bitmap[] tubeTop, tubeBottom;
+    Bitmap[] brickTop, brickBottom;
 
     public BitmapBank(Resources res) {
         background = BitmapFactory.decodeResource(res, R.drawable.main_background);
-        tubeTop = new Bitmap[4];
-        tubeBottom = new Bitmap[4];
+        brickTop = new Bitmap[4];
+        brickBottom = new Bitmap[4];
         geof = BitmapFactory.decodeResource(res, R.drawable.geof);
-        tubeTop[0] = BitmapFactory.decodeResource(res, R.drawable.tube_top1);
-        tubeTop[1] = BitmapFactory.decodeResource(res, R.drawable.tube_top2);
-        tubeTop[2] = BitmapFactory.decodeResource(res, R.drawable.tube_top3);
-        tubeTop[3] = BitmapFactory.decodeResource(res, R.drawable.tube_top4);
-        tubeBottom[0] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom1);
-        tubeBottom[1] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom2);
-        tubeBottom[2] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom3);
-        tubeBottom[3] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom4);
+        brickTop[0] = BitmapFactory.decodeResource(res, R.drawable.tube_top1);
+        brickTop[1] = BitmapFactory.decodeResource(res, R.drawable.tube_top2);
+        brickTop[2] = BitmapFactory.decodeResource(res, R.drawable.tube_top3);
+        brickTop[3] = BitmapFactory.decodeResource(res, R.drawable.tube_top4);
+        brickBottom[0] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom1);
+        brickBottom[1] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom2);
+        brickBottom[2] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom3);
+        brickBottom[3] = BitmapFactory.decodeResource(res, R.drawable.tube_bottom4);
     }
 
 
 
-    // Return Tube-Top Bitmap
-    public Bitmap getTubeTop1(){
-        return tubeTop[0];
+    // Return Brick-Top Bitmap
+    public Bitmap getBrickTop1(){
+        return brickTop[0];
     }
-    public Bitmap getTubeTop2(){
-        return tubeTop[1];
+    public Bitmap getBrickTop2(){
+        return brickTop[1];
     }
-    public Bitmap getTubeTop3(){
-        return tubeTop[2];
+    public Bitmap getBrickTop3(){
+        return brickTop[2];
     }
-    public Bitmap getTubeTop4(){
-        return tubeTop[3];
+    public Bitmap getBrickTop4(){
+        return brickTop[3];
     }
-    // Return Tube-Bottom Bitmap
-    public Bitmap getTubeBottom1(){
-        return tubeBottom[0];
+    // Return Brick-Bottom Bitmap
+    public Bitmap getBrickBottom1(){
+        return brickBottom[0];
     }
-    public Bitmap getTubeBottom2(){
-        return tubeBottom[1];
+    public Bitmap getBrickBottom2(){
+        return brickBottom[1];
     }
-    public Bitmap getTubeBottom3(){
-        return tubeBottom[2];
+    public Bitmap getBrickBottom3(){
+        return brickBottom[2];
     }
-    public Bitmap getTubeBottom4(){
-        return tubeBottom[3];
-    }
-
-    //Return Tube-width
-    public int getTubeWidth(){
-        return tubeTop[0].getWidth();
+    public Bitmap getBrickBottom4(){
+        return brickBottom[3];
     }
 
-    //Return Tube-height
-    public int getTubeHeight(){
-        return tubeTop[0].getHeight();
+    //Return Brick-width
+    public int getBrickWidth(){
+        return brickTop[0].getWidth();
+    }
+
+    //Return Brick-height
+    public int getBrickHeight(){
+        return brickTop[0].getHeight();
     }
 
     // Return geof bitmap of frame

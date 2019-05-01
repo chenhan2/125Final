@@ -2,14 +2,11 @@ package com.example.a3;
 
 public class Geof {
 
-    private int geofX, geofY, currentFrame, velocity;
-    public static int maxFrame;
+    private int geofX, geofY, velocity;
 
     public Geof(){
         geofX = AppConstants.SCREEN_WIDTH/2 - AppConstants.getBitmapBank().getGeofWidth()/2;
         geofY = AppConstants.SCREEN_HEIGHT/2 - AppConstants.getBitmapBank().getGeofHeight()/2;
-        currentFrame = 0;
-        maxFrame = 3;
         velocity = 0;
     }
 

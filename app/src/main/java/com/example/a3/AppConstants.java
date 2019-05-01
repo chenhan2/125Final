@@ -12,12 +12,12 @@ public class AppConstants {
     static int SCREEN_WIDTH, SCREEN_HEIGHT;
     static int gravity;
     static int VELOCITY_WHEN_JUMPED;
-    static int gapBetweenTopAndBottomTubes;
-    static int numberOfTubes;
-    static int tubeVelocity;
-    static int minTubeOffsetY;
-    static int maxTubeOffsetY;
-    static int distanceBetweenTubes;
+    static int gapBetweenTopAndBottomBricks;
+    static int numberOfBricks;
+    static int brickVelocity;
+    static int minBrickOffsetY;
+    static int maxBrickOffsetY;
+    static int distanceBetweenBricks;
     static SoundBank soundBank;
     static Context gameActivityContext;
 
@@ -34,14 +34,14 @@ public class AppConstants {
     }
 
     public static void setGameConstants(){
-        gravity = 3;
-        VELOCITY_WHEN_JUMPED = -40;
-        gapBetweenTopAndBottomTubes = 550;
-        numberOfTubes = 4;
-        tubeVelocity = 12;
-        minTubeOffsetY = (int)(gapBetweenTopAndBottomTubes / 2.0);
-        maxTubeOffsetY = SCREEN_HEIGHT - minTubeOffsetY - gapBetweenTopAndBottomTubes;
-        distanceBetweenTubes = SCREEN_WIDTH * 3 /4;
+        gravity = -3;
+        VELOCITY_WHEN_JUMPED = 40;
+        gapBetweenTopAndBottomBricks = 800;
+        numberOfBricks = 4;
+        brickVelocity = 18;
+        minBrickOffsetY = (int)(gapBetweenTopAndBottomBricks / 2.0);
+        maxBrickOffsetY = SCREEN_HEIGHT - minBrickOffsetY - gapBetweenTopAndBottomBricks;
+        distanceBetweenBricks = SCREEN_WIDTH * 3 /4;
     }
 
     // Return BitmapBank instance

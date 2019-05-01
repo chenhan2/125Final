@@ -15,10 +15,10 @@ public class GameEngine {
     BackgroundImage backgroundImage;
     Geof geof;
     static int gameState;
-    ArrayList<Tube> tubes;
+    ArrayList<Brick> bricks;
     Random random;
     int score; // Stores the score
-    int scoringTube; // Keeps track of scoring tube
+    int scoringBrick; // Keeps track of scoring brick
     Paint scorePaint;
 
     public GameEngine() {
@@ -28,30 +28,30 @@ public class GameEngine {
         //1 = Playing
         //2 = GameOver
         gameState = 0;
-        tubes = new ArrayList<>();
+        bricks = new ArrayList<>();
         random = new Random();
-        for (int i = 0; i < AppConstants.numberOfTubes; i++) {
-            int tubeX = AppConstants.SCREEN_WIDTH + i * AppConstants.distanceBetweenTubes;
-            // Get topTubeOffsetY
-            int topTubeOffsetY = AppConstants.minTubeOffsetY +
-                    random.nextInt(AppConstants.maxTubeOffsetY - AppConstants.minTubeOffsetY + 1);
-            // Now create Tube objects
-            Tube tube = new Tube(tubeX, topTubeOffsetY);
-            tubes.add(tube);
+        for (int i = 0; i < AppConstants.numberOfBricks; i++) {
+            int brickX = AppConstants.SCREEN_WIDTH + i * AppConstants.distanceBetweenBricks;
+            // Get topBrickOffsetY
+            int topBrickOffsetY = AppConstants.minBrickOffsetY +
+                    random.nextInt(AppConstants.maxBrickOffsetY - AppConstants.minBrickOffsetY + 1);
+            // Now create Brick objects
+            Brick brick = new Brick(brickX, topBrickOffsetY);
+            bricks.add(brick);
         }
         score = 0;
-        scoringTube = 0;
+        scoringBrick = 0;
         scorePaint = new Paint();
-        scorePaint.setColor(Color.RED);
+        scorePaint.setColor(Color.BLACK);
         scorePaint.setTextSize(100);
         scorePaint.setTextAlign(Paint.Align.LEFT);
     }
 
-    public void updateAndDrawTubes(Canvas canvas) {
+    public void updateAndDrawBricks(Canvas canvas) {
         if (gameState == 1) {
-            if ((tubes.get(scoringTube).getTubeX() < geof.getX() + AppConstants.getBitmapBank().getGeofWidth())
-                    && (tubes.get(scoringTube).getTopTubeOffsetY() > geof.getY()
-                    || tubes.get(scoringTube).getBottomTubeY() < (geof.getY() +
+            if ((bricks.get(scoringBrick).getBrickX() < geof.getX() + AppConstants.getBitmapBank().getGeofWidth())
+                    && (bricks.get(scoringBrick).getTopBrickOffsetY() > geof.getY()
+                    || bricks.get(scoringBrick).getBottomBrickY() < (geof.getY() +
                     AppConstants.getBitmapBank().getGeofHeight()))) {
                 // Go to GameOver screen
                 gameState = 2;
@@ -62,36 +62,36 @@ public class GameEngine {
                 intent.putExtra("score", score);
                 context.startActivity(intent);
                 ((Activity) context).finish();
-            } else if (tubes.get(scoringTube).getTubeX() < geof.getX() - AppConstants.getBitmapBank().getTubeWidth()) {
+            } else if (bricks.get(scoringBrick).getBrickX() < geof.getX() - AppConstants.getBitmapBank().getBrickWidth()) {
                 score++;
-                scoringTube++;
-                if (scoringTube > AppConstants.numberOfTubes - 1) {
-                    scoringTube = 0;
+                scoringBrick++;
+                if (scoringBrick > AppConstants.numberOfBricks - 1) {
+                    scoringBrick = 0;
                 }
                 AppConstants.getSoundBank().playPoint();
             }
-            for (int i = 0; i < AppConstants.numberOfTubes; i++) {
-                if (tubes.get(i).getTubeX() < -AppConstants.getBitmapBank().getTubeWidth()) {
-                    tubes.get(i).setTubeX(tubes.get(i).getTubeX() +
-                            AppConstants.numberOfTubes * AppConstants.distanceBetweenTubes);
-                    int topTubeOffsetY = AppConstants.minTubeOffsetY +
-                            random.nextInt(AppConstants.maxTubeOffsetY - AppConstants.minTubeOffsetY + 1);
-                    tubes.get(i).setTopTubeOffsetY(topTubeOffsetY);
-                    tubes.get(i).setTubeWord();
+            for (int i = 0; i < AppConstants.numberOfBricks; i++) {
+                if (bricks.get(i).getBrickX() < -AppConstants.getBitmapBank().getBrickWidth()) {
+                    bricks.get(i).setBrickX(bricks.get(i).getBrickX() +
+                            AppConstants.numberOfBricks * AppConstants.distanceBetweenBricks);
+                    int topBrickOffsetY = AppConstants.minBrickOffsetY +
+                            random.nextInt(AppConstants.maxBrickOffsetY - AppConstants.minBrickOffsetY + 1);
+                    bricks.get(i).setTopBrickOffsetY(topBrickOffsetY);
+                    bricks.get(i).setBrickWord();
                 }
-                tubes.get(i).setTubeX(tubes.get(i).getTubeX() - AppConstants.tubeVelocity);
-                if (tubes.get(i).getTubeWord() == 0) {
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeTop1(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeBottom1(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
-                } else if (tubes.get(i).getTubeWord() == 1) {
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeTop2(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeBottom2(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
-                } else if (tubes.get(i).getTubeWord() == 2) {
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeTop3(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeBottom3(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
-                } else if (tubes.get(i).getTubeWord() == 3) {
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeTop4(), tubes.get(i).getTubeX(), tubes.get(i).getTopTubeY(), null);
-                    canvas.drawBitmap(AppConstants.getBitmapBank().getTubeBottom4(), tubes.get(i).getTubeX(), tubes.get(i).getBottomTubeY(), null);
+                bricks.get(i).setBrickX(bricks.get(i).getBrickX() - AppConstants.brickVelocity);
+                if (bricks.get(i).getBrickWord() == 0) {
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getBrickTop1(), bricks.get(i).getBrickX(), bricks.get(i).getTopBrickY(), null);
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getBrickBottom1(), bricks.get(i).getBrickX(), bricks.get(i).getBottomBrickY(), null);
+                } else if (bricks.get(i).getBrickWord() == 1) {
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getBrickTop2(), bricks.get(i).getBrickX(), bricks.get(i).getTopBrickY(), null);
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getBrickBottom2(), bricks.get(i).getBrickX(), bricks.get(i).getBottomBrickY(), null);
+                } else if (bricks.get(i).getBrickWord() == 2) {
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getBrickTop3(), bricks.get(i).getBrickX(), bricks.get(i).getTopBrickY(), null);
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getBrickBottom3(), bricks.get(i).getBrickX(), bricks.get(i).getBottomBrickY(), null);
+                } else if (bricks.get(i).getBrickWord() == 3) {
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getBrickTop4(), bricks.get(i).getBrickX(), bricks.get(i).getTopBrickY(), null);
+                    canvas.drawBitmap(AppConstants.getBitmapBank().getBrickBottom4(), bricks.get(i).getBrickX(), bricks.get(i).getBottomBrickY(), null);
                 }
             }
             canvas.drawText("Pt: " + score, 0, 110, scorePaint);
